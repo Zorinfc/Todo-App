@@ -4,7 +4,6 @@ import TodoButtons from './components/TodoButtons/TodoButtons'
 import TodoList from './components/TodoList/TodoList'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 function App() {
   return (
     <div className="App">

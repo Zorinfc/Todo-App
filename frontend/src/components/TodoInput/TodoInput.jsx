@@ -6,11 +6,10 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { Container } from 'react-bootstrap';
 // Fontawesome Icon 
 // Iconu sonra eklemeye çalış
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faBook } from '@fortawesome/free-solid-svg-icons';
 import React, { useState,useEffect } from 'react';
-import axios from 'axios';
-import TodoServicesApi from '../../services/TodoServicesApi';
+
 
 
  function TodoInput () {
@@ -18,8 +17,6 @@ import TodoServicesApi from '../../services/TodoServicesApi';
   const [newItem, setNewItem] = useState("");
   const isItDone ='Yapılmadı'
 
-
- 
 
   //Create
     const sendDataToApi = async()=>{

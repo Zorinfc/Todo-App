@@ -2,14 +2,23 @@ import React, { useEffect, useState } from 'react'
 import TodoServicesApi from './../../services/TodoServicesApi'
 import axios from 'axios';
 import './todolist.css'
+import {Table} from 'react-bootstrap';
+import Modal from './Modal'
 
 
+const BUTTON_WRAPPER_STYLES = {
+  position: 'relative',
+  zIndex: 1
+}
 
-
+const OTHER_CONTENT_STYLES = {
+  position: 'relative',
+  zIndex: 2,
+  backgroundColor: 'red',
+  padding: '10px'
+}
 
 function TodoList() {
-
-
 
   const [todoListApi, setTodoListApi]=useState([]);
 
@@ -28,6 +37,7 @@ function TodoList() {
     }
   }
 
+  // Delete 
   const setDeleteTodo = async (id) =>{
     axios.delete("http://localhost:9090/deleteTodoById/"+id).then().catch();
     console.log('Id li data silindi' + id);
@@ -38,15 +48,17 @@ function TodoList() {
     setTimeout(() => {
       // Sayfayı yenile
       window.location.reload();
-    }, 1000);
+    }, 200);
   }
+  ////////////////
 
+  const [isOpen, setIsOpen] = useState(true)
   //Update
   // <-----------|YAPILACAK|----------->
-  const editTodo = (response)=>{
-    console.log(response.id);
+  function editTodo (response){
+    
     console.log(response.title);
-    console.log(response.status);
+
 
   }
   
@@ -88,7 +100,17 @@ function TodoList() {
         break;
     }
   }
+  //////////////// 
 
+  // Ustunu ciz
+  const ustuCiziliMi =(response)=>{
+        if(response.status == "Yapıldı"){
+      return <span className='strikethrough-text'>{response.title}</span>
+    }
+    else
+      return response.title
+  }
+  ////////////////
 
   // Tarih saat düzenlemesi
   // Gelene data == "2023-11-14T14:20:28.663+00:00 "
@@ -110,12 +132,10 @@ function TodoList() {
 
   return (
     <React.Fragment>
-    <br /><br /><br /><br />
-    <table className='table table-dark'>
-      <thead className='thead-light'>
+    <Table className='container table table-stirped table-hover'>
+      <thead className='table-dark'>
         <tr>
           <th>Title</th>
-          <th>Status</th>
           <th>Date</th>
           <th>Actions</th>
         </tr>
@@ -124,28 +144,26 @@ function TodoList() {
         {
           todoListApi.map((response) =>
             <tr key={response.id}>
-              <td>{response.title}</td>
-              <td>{response.status}</td>
+              <td>{ustuCiziliMi(response)}</td>
                {/*Formatlanmış tarih ve saat */}
               <td>{formattedDate(response.date)}</td>
               <td>
-                <div style={{cursor:'pointer'}}>
-                {/*Delete Button & Function*/}
-                <i onClick={() => setDeleteTodo(response.id)}
-                className="fa-solid fa-trash" ></i>
-                {/*Edit Button & Function*/}
-                <i onClick={()=> editTodo(response)}
-                className='fa-solid fa-pen-to-square'></i>
-                 {/*Check Button & Function*/}
-                <i onClick={() =>checkTodoUpdate(response)}
-                className='fa-solid fa-check'></i>
+                <div className='d-flex gap-3 justify-content-center pt-1' style={{cursor:'pointer'}}>
+                  {/*Delete Button & Function*/}
+                  <i onClick={() => setDeleteTodo(response.id)}
+                  className="fa-solid fa-trash" ></i>
+                  {/*Edit Button & Function*/}
+                  <Modal/>
+                  {/*Check Button & Function*/}
+                  <i onClick={() =>checkTodoUpdate(response)}
+                  className='fa-solid fa-check'></i>
                 </div>
               </td>
             </tr>
           )
         }
       </tbody>
-    </table>
+    </Table>
 
   </React.Fragment>
   )
