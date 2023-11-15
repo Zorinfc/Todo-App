@@ -1,15 +1,18 @@
 import './App.css';
 import TodoInput from './components/TodoInput/TodoInput'
-import TodoButtons from './components/TodoButtons/TodoButtons'
 import TodoList from './components/TodoList/TodoList'
 import 'bootstrap/dist/css/bootstrap.min.css';
+//import TodoButtons from './components/TodoButtons/TodoButtons'
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <TodoInput/>
-        <TodoButtons/>
+
+        {/* Yapıalcak */}
+        {/* <TodoButtons/> */}
         <TodoList/>
       </header>
     </div>

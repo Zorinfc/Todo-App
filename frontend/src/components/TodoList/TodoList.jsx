@@ -3,20 +3,7 @@ import TodoServicesApi from './../../services/TodoServicesApi'
 import axios from 'axios';
 import './todolist.css'
 import {Table} from 'react-bootstrap';
-import Modal from './Modal'
-
-
-const BUTTON_WRAPPER_STYLES = {
-  position: 'relative',
-  zIndex: 1
-}
-
-const OTHER_CONTENT_STYLES = {
-  position: 'relative',
-  zIndex: 2,
-  backgroundColor: 'red',
-  padding: '10px'
-}
+import Example from '../Modal/Modal'
 
 function TodoList() {
 
@@ -51,17 +38,8 @@ function TodoList() {
     }, 200);
   }
   ////////////////
-
-  const [isOpen, setIsOpen] = useState(true)
   //Update
-  // <-----------|YAPILACAK|----------->
-  function editTodo (response){
-    
-    console.log(response.title);
-
-
-  }
-  
+    // MODAL ILE YAPILDI
   //CheckTodo
   const checkTodoUpdate = async(response)=>{
     let id = response.id
@@ -104,7 +82,7 @@ function TodoList() {
 
   // Ustunu ciz
   const ustuCiziliMi =(response)=>{
-        if(response.status == "Yapıldı"){
+        if(response.status === "Yapıldı"){
       return <span className='strikethrough-text'>{response.title}</span>
     }
     else
@@ -153,7 +131,8 @@ function TodoList() {
                   <i onClick={() => setDeleteTodo(response.id)}
                   className="fa-solid fa-trash" ></i>
                   {/*Edit Button & Function*/}
-                  <Modal/>
+                  {/* <Modal/> */}
+                  <Example message={response}/>
                   {/*Check Button & Function*/}
                   <i onClick={() =>checkTodoUpdate(response)}
                   className='fa-solid fa-check'></i>

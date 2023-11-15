@@ -8,7 +8,7 @@ import { Container } from 'react-bootstrap';
 // Iconu sonra eklemeye çalış
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBook } from '@fortawesome/free-solid-svg-icons';
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 
 
 
@@ -20,7 +20,7 @@ import React, { useState,useEffect } from 'react';
 
   //Create
     const sendDataToApi = async()=>{
-      if(newItem !=""){
+      if(newItem !==""){
         try{
           const response = await fetch('http://localhost:9090/addTodo',{
             method:'POST',
